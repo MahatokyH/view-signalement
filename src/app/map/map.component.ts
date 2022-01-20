@@ -33,7 +33,8 @@ export class MapComponent implements OnInit {
 
   initilizeMap() {
     var localisation: string[] | any;
-    localisation=this.signalement.localisation?.split(';');
+    localisation=this.signalement.localisation?.split(',');
+    console.log(localisation);
     $('#ficheModal').on('shown.bs.modal', function(){ 
       document.getElementById('map')!.innerHTML='';
       var map = new Map({
