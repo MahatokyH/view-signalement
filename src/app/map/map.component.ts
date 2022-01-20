@@ -31,10 +31,10 @@ export class MapComponent implements OnInit {
       this.initilizeMap();
   }
 
-  initilizeMap() {
+  initilizeMap() { console.log(this.signalement.localisation);
     var localisation: string[] | any;
     localisation=this.signalement.localisation?.split(',');
-    console.log(localisation);
+   
     $('#ficheModal').on('shown.bs.modal', function(){ 
       document.getElementById('map')!.innerHTML='';
       var map = new Map({
