@@ -46,6 +46,8 @@ export class RechercheUserComponent implements OnInit {
 
     var data = {
       "region": region,
+      "page":1,
+      "token":window.localStorage.getItem("token"),
       "identifiant":identifiant
     };
 

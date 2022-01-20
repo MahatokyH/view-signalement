@@ -79,7 +79,7 @@ export class UserService {
         const  options = { headers: { 'Content-Type': 'application/json' } };
         var token = window.localStorage.getItem("token");
         if(token!=null) {
-            this.http.put("https://boiling-sea-05714.herokuapp.com/UserRegion",data,options).subscribe((response:any)=>{
+            this.http.put("https://boiling-sea-05714.herokuapp.com/UserRegion?",data,options).subscribe((response:any)=>{
                 if (response["success"] == 1) {
                     this.response = true;
                 } else {
@@ -135,7 +135,7 @@ export class UserService {
     find(data:any) { 
         var token = window.localStorage.getItem("token");
         if(token!=null) {
-            this.http.get("https://boiling-sea-05714.herokuapp.com/UserRegion"+this.url.encode(data)).subscribe((response:any)=>{
+            this.http.get("https://boiling-sea-05714.herokuapp.com/UserRegion?"+this.url.encode(data)).subscribe((response:any)=>{
                 if(response["success"]==true) {
                     this.user=response["list"];
                     this.emitUser();
