@@ -30,12 +30,12 @@ export class MapComponent implements OnInit {
   ngOnInit() { 
       this.initilizeMap();
   }
+  
 
-  initilizeMap() { console.log(this.signalement.localisation);
-    var localisation: string[] | any;
-    localisation=this.signalement.localisation?.split(',');
-   
+  initilizeMap() { 
     $('#ficheModal').on('shown.bs.modal', function(){ 
+      var localisation: string[] | any;
+      localisation= $("#LONG_LAT").val()?.toString().split(',');
       document.getElementById('map')!.innerHTML='';
       var map = new Map({
         target: 'map',

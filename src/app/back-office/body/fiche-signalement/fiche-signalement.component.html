@@ -30,6 +30,7 @@
                             <option *ngFor="let item of regions" [value]="item.id">{{ item.nom }}</option>
                         </select>
                     </div> 
+                    <input type="hidden" id="LONG_LAT" value="{{signalement.localisation}}" >
                     <app-map [signalement]="signalement"></app-map>
                 </div>
                 <div class="modal-footer">
