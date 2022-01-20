@@ -19,23 +19,23 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.url.subscribe(value => {
-      var url = location.href.split("/")[1];
+    this.route.url.subscribe((value:any) => {
+      var url = location.href.split("https://view-back-signalement.herokuapp.com/")[1];
       var token = window.localStorage.getItem("token"); 
-      this.userService.testToken(token); 
+      //this.userService.testToken(token); 
       if (url.length == 0 || url.toLowerCase() == "login") {
         if (token == null || !window.localStorage.getItem('access')) {
           this.login = true;
-        } else if (window.localStorage.getItem('access') == '1') {
+        } else if (token != null && window.localStorage.getItem('access') == '1') {
           this.login = false;
-          window.location.href = " https://view-back-signalement.herokuapp.com/liste-signalement";
+          window.location.href = "https://view-back-signalement.herokuapp.com/liste-signalement";
         }
       } else if (url.length > 0 && url.toLowerCase() != "login") {
         if (token != null && window.localStorage.getItem('access') == '1') {
           this.login = false;
         } else {
           this.login = true;
-          window.location.href = " https://view-back-signalement.herokuapp.com/";
+          window.location.href = "https://view-back-signalement.herokuapp.com/";
         }
 
       }
