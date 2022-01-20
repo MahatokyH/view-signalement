@@ -89,6 +89,7 @@ export class FicheUserComponent implements OnInit {
         "mdp":this.form.value.pwd,
         "token":window.localStorage.getItem("token")
       } 
+      console.log(data);
       this.userService.response$.subscribe((response)=>{
           if(response==true) {
             this.headerSave="Ajout d'un nouveau utilisateur";
