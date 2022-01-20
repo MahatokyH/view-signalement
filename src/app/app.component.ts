@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     this.route.url.subscribe((value:any) => {
       var url = location.href.split("https://view-back-signalement.herokuapp.com/")[1];
       var token = window.localStorage.getItem("token"); 
-      //this.userService.testToken(token); 
+      this.userService.testToken(token); 
       if (url.length == 0 || url.toLowerCase() == "login") {
         if (token == null || !window.localStorage.getItem('access')) {
           this.login = true;
