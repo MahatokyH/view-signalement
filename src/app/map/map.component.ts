@@ -32,7 +32,8 @@ export class MapComponent implements OnInit {
   }
 
   initilizeMap() {
-    var localisation=this.signalement.localisation?.split(';');
+    var localisation: string[] | any;
+    localisation=this.signalement.localisation?.split(';');
     $('#ficheModal').on('shown.bs.modal', function(){ 
       document.getElementById('map')!.innerHTML='';
       var map = new Map({
@@ -53,7 +54,7 @@ export class MapComponent implements OnInit {
         ],
         view: new View({
           //center : fromLonLat([localisation])
-          center: fromLonLat([47.5255809, -18.9100122]),
+          center: fromLonLat([Number.parseInt(localisation[0]),Number.parseInt(localisation[1])] ),
           zoom: 8
         })
       });
@@ -69,7 +70,7 @@ export class MapComponent implements OnInit {
       });
       map.addLayer(markers);
       //var marker = new Feature(new Point(fromLonLat([localisation])));
-      var marker = new Feature(new Point(fromLonLat([47.5255809, -18.9100122])));
+      var marker = new Feature(new Point(fromLonLat([Number.parseInt(localisation[0]),Number.parseInt(localisation[1])])));
       markers.getSource().addFeature(marker);
       map.updateSize();
     }); 
