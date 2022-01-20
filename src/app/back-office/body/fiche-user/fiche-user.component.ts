@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Region } from 'src/app/models/region.model';
 import { User } from 'src/app/models/user.model';
 import { RegionService } from 'src/app/service/region.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-fiche-user',
@@ -31,6 +32,7 @@ export class FicheUserComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private regionService: RegionService,
+              private userService: UserService,
               private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void { 
@@ -64,16 +66,37 @@ export class FicheUserComponent implements OnInit {
     if (this.form.invalid) { 
       return;
     } 
+    var data;
     if(this.user.id!=null) {
-      this.headerSave='Sauvegarde des changements';
+      data = {
+        "identifiant": this.form.value.identifiant,
+        "id": this.user.id,
+        "region":this.region,
+        "mdp":this.form.value.pwd,
+        "token":window.localStorage.getItem("token")
+      } 
+      this.userService.response$.subscribe((response)=>{
+          if(response==true) {
+            this.headerSave='Sauvegarde des changements';
+          }
+      })
+      this.userService.update(data); 
+      
     } else {
-      var data = {
+      data = {
         "identifiant": this.form.value.identifiant,
         "region":this.region,
-        "password":this.form.value.pwd,
+        "mdp":this.form.value.pwd,
+        "token":window.localStorage.getItem("token")
       } 
-      this.headerSave="Ajout d'un nouveau utilisateur";
+      this.userService.response$.subscribe((response)=>{
+          if(response==true) {
+            this.headerSave="Ajout d'un nouveau utilisateur";
+          }
+      })
+      this.userService.add(data); 
     }
+
   }
 
   reset():void {
