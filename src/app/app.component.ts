@@ -28,14 +28,14 @@ export class AppComponent implements OnInit {
           this.login = true;
         } else if (window.localStorage.getItem('access') == '1') {
           this.login = false;
-          window.location.href = "/liste-signalement";
+          window.location.href = " https://view-back-signalement.herokuapp.com/liste-signalement";
         }
       } else if (url.length > 0 && url.toLowerCase() != "login") {
         if (token != null && window.localStorage.getItem('access') == '1') {
           this.login = false;
         } else {
           this.login = true;
-          window.location.href = "/";
+          window.location.href = " https://view-back-signalement.herokuapp.com/";
         }
 
       }

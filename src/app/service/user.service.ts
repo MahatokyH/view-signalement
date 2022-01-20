@@ -25,10 +25,10 @@ export class UserService {
                 try {
                     if ( valuer["token"] != null) {
                         window.localStorage.setItem("token", valuer["token"]);
-                        window.location.href = "/liste-signalement"; 
+                        window.location.href = " https://view-back-signalement.herokuapp.com/liste-signalement"; 
                     }
                 } catch (error) {
-                    window.location.href = "/login"; 
+                    window.location.href = " https://view-back-signalement.herokuapp.com/login"; 
                 }
             });
         } else {
