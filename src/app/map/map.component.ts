@@ -54,7 +54,7 @@ export class MapComponent implements OnInit {
         ],
         view: new View({
           //center : fromLonLat([localisation])
-          center: fromLonLat([Number.parseInt(localisation[0]),Number.parseInt(localisation[1])] ),
+          center: fromLonLat([Number.parseFloat(localisation[1]),Number.parseFloat(localisation[0])] ),
           zoom: 8
         })
       });
@@ -70,7 +70,7 @@ export class MapComponent implements OnInit {
       });
       map.addLayer(markers);
       //var marker = new Feature(new Point(fromLonLat([localisation])));
-      var marker = new Feature(new Point(fromLonLat([Number.parseInt(localisation[0]),Number.parseInt(localisation[1])])));
+      var marker = new Feature(new Point(fromLonLat([Number.parseFloat(localisation[1]),Number.parseFloat(localisation[0])])));
       markers.getSource().addFeature(marker);
       map.updateSize();
     }); 
