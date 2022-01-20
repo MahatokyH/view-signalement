@@ -1,0 +1,95 @@
+<div class="content-wrapper" style="min-height: 1299.69px;">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{ title }}</h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <app-recherche (newItemEventFind)="findSignalement($event)" (newItemEventFindP)="pfindSignalement($event)"  [pageFocus]="page" ></app-recherche>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <!--<div class="card-header">
+                <h3 class="card-title">DataTable with minimal features &amp; hover style</h3>
+              </div> -->
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6"></div>
+                  <div class="col-sm-12 col-md-6"></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid"
+                      aria-describedby="example2_info">
+                      <thead>
+                        <tr role="row">
+                          <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                            aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                            Signalement</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                            aria-label="Browser: activate to sort column ascending">Utilisateur</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                            aria-label="Platform(s): activate to sort column ascending">Localisation</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                            aria-label="Engine version: activate to sort column ascending">Date</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="odd" *ngFor="let sign of signalement">
+                          <td class="dtr-control sorting_1" tabindex="0">{{ sign.typenom }}</td>
+                          <td>{{ sign.client }}</td>
+                          <td>00.00.00;00.00.00</td>
+                          <td>{{ sign.jour | date: 'dd/MM/yyyy' }}</td>
+                          <td style="text-align: center;">
+                            <span class="btn btn-danger mr-2"><i class="fas fa-trash"></i></span>
+                            <span class="btn btn-warning" data-toggle="modal" data-target="#ficheModal" (click)="fiche(sign)" ><i class="fas fa-eye"></i></span>
+                          </td>
+                        </tr> 
+                    </table>
+                  </div>
+                </div>
+                <div class="row float-right">
+                  <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                      <ul class="pagination">
+                        <span *ngFor="let p of pagination" class="paginate_button page-item"  >
+                          <li *ngIf="page==p" class="paginate_button page-item active">
+                            <a  aria-controls="example2" ng-data-dt-idx="p" tabindex="0" class="page-link">
+                              {{ p }}
+                            </a>
+                          </li>
+                          <li *ngIf="page!=p" class="" >
+                            <a (click)="listePage(p)" aria-controls="example2" ng-data-dt-idx="p" tabindex="0" class="page-link">
+                              {{ p }}
+                            </a>
+                          </li>
+                        </span>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div> 
+<app-fiche-signalement [signalement]="singleSignalement" ></app-fiche-signalement>

@@ -1,0 +1,50 @@
+<body class="login-page" style="min-height: 496.391px;">
+    <div class="login-box">
+        <div class="login-logo">
+            <a routerLikn="/login"><b>Admin</b> SIGNALEMENT</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Connectez-vous</p>
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Identifiant" formControlName="identifiant"
+                            [ngClass]="{ 'is-invalid': submitted && f.identifiant.errors }">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                        <div *ngIf="submitted && f.identifiant.errors" class="invalid-feedback">
+                            <div *ngIf="f.identifiant.errors.required">Identifiant is required</div> 
+                        </div>
+                    </div> 
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Mot de passe" formControlName="pwd"
+                            [ngClass]="{ 'is-invalid': submitted && f.pwd.errors }" >
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        <div *ngIf="submitted && f.pwd.errors" class="invalid-feedback">
+                            <div *ngIf="f.pwd.errors.required">Password is required</div>
+                        </div>
+                    </div>
+                   
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Connexion</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+</body>

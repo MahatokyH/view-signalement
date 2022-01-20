@@ -1,0 +1,37 @@
+<section class="content">
+    <div class="container-fluid">
+        <form action="enhanced-results.html" [formGroup]="campaignOne">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-3">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Type de signalement</mat-label>
+                                <mat-select disableRipple formControlName="type">
+                                    <mat-option *ngFor="let item of types" value="{{ item.id }}">{{ item.nom }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field class="example-form-field" appearance="fill">
+                                <mat-label>First campaign</mat-label>
+                                <mat-date-range-input [rangePicker]="campaignOnePicker">
+                                    <input matStartDate placeholder="Start date" formControlName="start">
+                                    <input matEndDate placeholder="End date" formControlName="end">
+                                </mat-date-range-input>
+                                <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" mat-raised-button class="btn btn-primary"
+                                (click)="show()" >Rechercher</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

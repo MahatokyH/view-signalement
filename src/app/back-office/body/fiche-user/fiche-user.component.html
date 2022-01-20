@@ -1,0 +1,69 @@
+<div class="modal fade" id="ficheModal" tabindex="-1" role="dialog" aria-labelledby="ficheModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ficheModalLabel">Fiche du signalement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="reset()" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="">Identifiant</label>
+                        <input class="form-control" type="text" *ngIf="user.id!=null"  formControlName="identifiant" [value]="user.identifiant" required> 
+                        <input class="form-control" type="text"  *ngIf="user.id==null" formControlName="identifiant"
+                        [ngClass]="{ 'is-invalid': submitted && f.identifiant.errors }" required> 
+                    </div>  
+                    <div *ngIf="submitted && f.identifiant.errors" class="invalid-feedback">
+                        <div *ngIf="f.identifiant.errors.required">Identifiant est requis</div> 
+                    </div>
+                    <div class="form-group">
+                        <label>Region:</label>
+                        <select class="form-control" style="width: 100%;" [(ngModel)]="region" (change)="onChange($event)" [ngModelOptions]="{standalone: true}" > 
+                            <option *ngFor="let item of regions" [value]="item.id" [attr.selected]='user.idregion==item.id ? "selected" : null'>{{ item.nom }}</option>
+                        </select>
+                    </div>  
+                    <div class="form-group">
+                        <label for="" *ngIf="user.id!=null" >Nouveau mot de passe</label>
+                        <label for="" *ngIf="user.id==null" >Mot de passe</label>
+                        <input class="form-control" type="password" formControlName="pwd"
+                        [ngClass]="{ 'is-invalid': submitted && f.pwd.errors }"> 
+                    </div> 
+                    <div *ngIf="submitted && f.pwd.errors" class="invalid-feedback">
+                        <div *ngIf="f.pwd.errors.required">Password est requis</div> 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reset()" >Fermer</button>
+                    <button type="submit" class="btn btn-primary" *ngIf="f.pwd.errors || f.identifiant.errors || region==null " disabled>Sauvegarder</button>
+                    <button type="submit" class="btn btn-primary" *ngIf="!f.pwd.errors && !f.identifiant.errors && region!=null " data-dismiss="modal" data-toggle="modal" data-target="#save" >Sauvegarder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="save" tabindex="-1" role="dialog" aria-labelledby="saveLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ficheModalLabel">{{ headerSave }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" (click)="reload()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"> 
+                    {{ viwResponse }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reload()">Fermer</button> 
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
