@@ -39,7 +39,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reset()" >Fermer</button>
                     <button type="submit" class="btn btn-primary" *ngIf="f.pwd.errors || f.identifiant.errors || region==null " disabled>Sauvegarder</button>
-                    <button type="submit" class="btn btn-primary" *ngIf="!f.pwd.errors && !f.identifiant.errors && region!=null " data-dismiss="modal" data-toggle="modal" data-target="#save" >Sauvegarder</button>
+                    <button type="submit" class="btn btn-primary" *ngIf="!f.pwd.errors && !f.identifiant.errors && region!=null " (click)="onSubmit()" data-dismiss="modal" data-toggle="modal" data-target="#save" >Sauvegarder</button>
                 </div>
             </form>
         </div>
