@@ -24,10 +24,10 @@ export class SignalementService {
 
     getSignalement(page: Number): void {
         var token = window.localStorage.getItem("token");
-        const  options = { headers: { 'Content-Type': 'application/json', 'authorization': token } };
+        const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
         if (token != null) {
             var url = 'https://boiling-sea-05714.herokuapp.com/Signalements?page=' + page;
-            this.http.get(url).subscribe(
+            this.http.get(url,options).subscribe(
                 (response: Signalement[] | any) => {
                     if (response) {
                         this.signalements = response;
@@ -45,17 +45,16 @@ export class SignalementService {
         var token = window.localStorage.getItem("token");
         if (token != null) {
             var data = {
-                "token" : token,
                 "page" : page,
                 "date1" : date1,                
                 "date2" : date2,
                 "status":"",
                 "type": type
             }
-
+            const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
             var url = 'https://boiling-sea-05714.herokuapp.com/Signalement?'+this.url.encode(data);
             console.log(url);
-            this.http.get(url).subscribe(
+            this.http.get(url,options).subscribe(
                 (response: Signalement[] | any) => {
                     if (response["list"] && response["pagination"]) {
                         this.signalements = response["list"];
@@ -73,10 +72,10 @@ export class SignalementService {
 
     getPaginationNumber(): void {
         var token = window.localStorage.getItem("token");
-        const  options = { headers: { 'Content-Type': 'application/json', 'authorization': token } };
+        const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
         if (token != null) {
             var url = 'https://boiling-sea-05714.herokuapp.com/Signalements/Pagination';
-            this.http.get(url).subscribe(
+            this.http.get(url,options).subscribe(
                 (response: any) => {
                     if (response["pagination"]) {
                         window.localStorage.setItem("pagination_singalement", response["pagination"]);
@@ -92,12 +91,12 @@ export class SignalementService {
     attribution(idregion: Number, idsignalement: Number): any {
         if (idregion != null && idsignalement != null && window.localStorage.getItem("token") != null) {
             var data = {
-                "token": window.localStorage.getItem("token"),
                 "signalement": idsignalement,
                 "region": idregion,
             }
             console.log(data);
-            const options = { headers: { 'Content-Type': 'application/json' } };
+            var token=window.localStorage.getItem("token");
+            const options = { headers: { 'Content-Type': 'application/json' , 'Authorization': token } };
             this.http.post('https://boiling-sea-05714.herokuapp.com/Signalement/Attribution', data, options).subscribe(
                 (response: any) => {
                     console.log(response);
@@ -117,8 +116,9 @@ export class SignalementService {
 
     delete(idsignalement: Number): void {
         var token = window.localStorage.getItem("token");
+        const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
         if (token != null) {
-            this.http.delete("https://boiling-sea-05714.herokuapp.com/Signalement/"+idsignalement).subscribe(
+            this.http.delete("https://boiling-sea-05714.herokuapp.com/Signalement/"+idsignalement,options).subscribe(
                 (response: any) => {
                     console.log(response);
                     if (response["success"] == 1) {
@@ -137,8 +137,9 @@ export class SignalementService {
 
     find(data:any) : void {
         var token = window.localStorage.getItem("token");
+        const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
         if (token != null) {
-            this.http.get("https://boiling-sea-05714.herokuapp.com/Signalement").subscribe(
+            this.http.get("https://boiling-sea-05714.herokuapp.com/Signalement",options).subscribe(
                 (response: Signalement[] | any) => {
                     if (response) {
                         this.signalements = response;

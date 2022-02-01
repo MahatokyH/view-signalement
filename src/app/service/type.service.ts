@@ -13,8 +13,8 @@ export class TypeService {
 
     AllListe() : void {
         var token=window.localStorage.getItem("token");
-        const  options = { headers: { 'Content-Type': 'application/json', 'authorization': token } };
-        this.http.get('https://boiling-sea-05714.herokuapp.com/TypeDeSignalement').subscribe(
+        const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
+        this.http.get('https://boiling-sea-05714.herokuapp.com/TypeDeSignalement',options).subscribe(
             (response: Type[] | any ) => { 
                 if (response) {
                     console.log(response);
