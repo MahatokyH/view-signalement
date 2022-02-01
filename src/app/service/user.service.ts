@@ -19,7 +19,7 @@ export class UserService {
     constructor(private http: HttpClient) { } 
 
     connexion(donne: any): void {
-        const  options = { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*' } };
+        const  options = { headers: { 'Content-Type': 'application/json'} };
         if (donne != null) {
             this.http.post('https://boiling-sea-05714.herokuapp.com/Login/Admin', donne,options).subscribe((valuer: any) => { 
                 try {
@@ -37,9 +37,10 @@ export class UserService {
 
     } 
     testToken(token: string | null): void {
-        const  options = { headers: { 'Content-Type': 'application/json' } };
+        token = String(window.localStorage.getItem("token")) ;
+        const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
         if (token != null) {
-            this.http.get('https://boiling-sea-05714.herokuapp.com/Token?token=' + token,options).subscribe(
+            this.http.get('https://boiling-sea-05714.herokuapp.com/Token',options).subscribe(
                 (value: any) => { 
                     if (value["access"] == true) {
                         this.response = true;  
@@ -59,9 +60,10 @@ export class UserService {
     }
 
     AllListe(page : Number ) : void{
-        var token=window.localStorage.getItem("token");
+        var token: string = String(window.localStorage.getItem("token")) ;
+        const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
         if(token!=null) {
-            this.http.get('https://boiling-sea-05714.herokuapp.com/UserRegion/WOC?page='+page+'&token='+token).subscribe(
+            this.http.get('https://boiling-sea-05714.herokuapp.com/UserRegion/WOC?page='+page,options).subscribe(
                 (response:any) => {
                     if(response["success"]==true) {
                         this.user=response["list"];
@@ -76,8 +78,8 @@ export class UserService {
     } 
 
     update(data:any) {
-        const  options = { headers: { 'Content-Type': 'application/json' } };
         var token: string = String(window.localStorage.getItem("token")) ;
+        const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
         if(token!=null) {
             this.http.put("https://boiling-sea-05714.herokuapp.com/UserRegion?",data,options).subscribe((response:any)=>{
                 if (response["success"] == 1) {
@@ -95,8 +97,8 @@ export class UserService {
     }
 
     add(data:any) {
-        const  options = { headers: { 'Content-Type': 'application/json' } };
         var token: string = String(window.localStorage.getItem("token")) ;
+        const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
         if(token!=null) {
             this.http.post("https://boiling-sea-05714.herokuapp.com/User/Add",data,options).subscribe((response:any)=>{
                 if (response["success"] == 1) {
@@ -114,10 +116,10 @@ export class UserService {
     }
 
     delete(id:Number) {
-        const  options = { headers: { 'Content-Type': 'application/json' } };
         var token: string = String(window.localStorage.getItem("token")) ;
+        const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
         if(token!=null) {
-            this.http.delete("https://boiling-sea-05714.herokuapp.com/UserRegion/"+id+"token="+token).subscribe((response:any)=>{
+            this.http.delete("https://boiling-sea-05714.herokuapp.com/UserRegion/"+id,options).subscribe((response:any)=>{
                 if (response["success"] == 1) {
                     this.response = true;
                 } else {
@@ -134,8 +136,9 @@ export class UserService {
 
     find(data:any) { 
         var token: string = String(window.localStorage.getItem("token")) ;
+        const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
         if(token!=null) {
-            this.http.get("https://boiling-sea-05714.herokuapp.com/UserRegion?"+this.url.encode(data)).subscribe((response:any)=>{
+            this.http.get("https://boiling-sea-05714.herokuapp.com/UserRegion?"+this.url.encode(data),options).subscribe((response:any)=>{
                 if(response["success"]==true) {
                     this.user=response["list"];
                     this.emitUser();
@@ -150,8 +153,9 @@ export class UserService {
 
     getPaginationNumber(): void {
         var token: string = String(window.localStorage.getItem("token")) ;
-        var url = 'https://boiling-sea-05714.herokuapp.com/UserRegion/WOC/Pagination?token=' + token;
-        this.http.get(url).subscribe(
+        const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
+        var url = 'https://boiling-sea-05714.herokuapp.com/UserRegion/WOC/Pagination';
+        this.http.get(url,options).subscribe(
             (response: any) => {
                 if (response["pagination"]) {
                     window.localStorage.setItem("pagination_user", response["pagination"]);
