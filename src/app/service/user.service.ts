@@ -19,7 +19,7 @@ export class UserService {
     constructor(private http: HttpClient) { } 
 
     connexion(donne: any): void {
-        const  options = { headers: { 'Content-Type': 'application/json' } };
+        const  options = { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*' } };
         if (donne != null) {
             this.http.post('https://boiling-sea-05714.herokuapp.com/Login/Admin', donne,options).subscribe((valuer: any) => { 
                 try {
