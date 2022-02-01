@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { UrlService } from './url.service';
 
@@ -16,12 +16,16 @@ export class UserService {
     private response!: boolean;
     private url = new UrlService(); 
 
-    constructor(private http: HttpClient) { } 
+    constructor(private http: HttpClient) { }  
 
-    connexion(donne: any): void {
-        const  options = { headers: { 'Content-Type': 'application/json'} };
+    connexion(donne: any): void { 
+        const httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type':  'application/json'
+            })
+          };
         if (donne != null) {
-            this.http.post('https://boiling-sea-05714.herokuapp.com/Login/Admin', donne,options).subscribe((valuer: any) => { 
+            this.http.post('https://boiling-sea-05714.herokuapp.com/Login/Admin', donne,httpOptions).subscribe((valuer: any) => { 
                 try {
                     if ( valuer["token"] != null) {
                         window.localStorage.setItem("token", valuer["token"]);
