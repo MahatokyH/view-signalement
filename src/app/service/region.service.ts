@@ -13,8 +13,10 @@ export class RegionService {
     constructor(private http: HttpClient) { } 
 
     AllListe() : void {
+
         var token=window.localStorage.getItem("token");
-        this.http.get('https://boiling-sea-05714.herokuapp.com/Signalement/Regions?token='+token).subscribe(
+        const  options = { headers: { 'Content-Type': 'application/json', 'authorization': token } };
+        this.http.get('https://boiling-sea-05714.herokuapp.com/Signalement/Regions').subscribe(
             (response: Region[] | any ) => { 
                 if (response) {
                     this.regions = response;

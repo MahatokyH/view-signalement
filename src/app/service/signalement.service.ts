@@ -24,8 +24,9 @@ export class SignalementService {
 
     getSignalement(page: Number): void {
         var token = window.localStorage.getItem("token");
+        const  options = { headers: { 'Content-Type': 'application/json', 'authorization': token } };
         if (token != null) {
-            var url = 'https://boiling-sea-05714.herokuapp.com/Signalements?token=' + token + '&page=' + page;
+            var url = 'https://boiling-sea-05714.herokuapp.com/Signalements?page=' + page;
             this.http.get(url).subscribe(
                 (response: Signalement[] | any) => {
                     if (response) {
@@ -72,8 +73,9 @@ export class SignalementService {
 
     getPaginationNumber(): void {
         var token = window.localStorage.getItem("token");
+        const  options = { headers: { 'Content-Type': 'application/json', 'authorization': token } };
         if (token != null) {
-            var url = 'https://boiling-sea-05714.herokuapp.com/Signalements/Pagination?token=' + token;
+            var url = 'https://boiling-sea-05714.herokuapp.com/Signalements/Pagination';
             this.http.get(url).subscribe(
                 (response: any) => {
                     if (response["pagination"]) {
