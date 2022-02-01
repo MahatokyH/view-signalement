@@ -77,7 +77,7 @@ export class UserService {
 
     update(data:any) {
         const  options = { headers: { 'Content-Type': 'application/json' } };
-        var token = window.localStorage.getItem("token");
+        var token: string = String(window.localStorage.getItem("token")) ;
         if(token!=null) {
             this.http.put("https://boiling-sea-05714.herokuapp.com/UserRegion?",data,options).subscribe((response:any)=>{
                 if (response["success"] == 1) {
@@ -96,7 +96,7 @@ export class UserService {
 
     add(data:any) {
         const  options = { headers: { 'Content-Type': 'application/json' } };
-        var token = window.localStorage.getItem("token");
+        var token: string = String(window.localStorage.getItem("token")) ;
         if(token!=null) {
             this.http.post("https://boiling-sea-05714.herokuapp.com/User/Add",data,options).subscribe((response:any)=>{
                 if (response["success"] == 1) {
@@ -115,7 +115,7 @@ export class UserService {
 
     delete(id:Number) {
         const  options = { headers: { 'Content-Type': 'application/json' } };
-        var token = window.localStorage.getItem("token");
+        var token: string = String(window.localStorage.getItem("token")) ;
         if(token!=null) {
             this.http.delete("https://boiling-sea-05714.herokuapp.com/UserRegion/"+id+"token="+token).subscribe((response:any)=>{
                 if (response["success"] == 1) {
@@ -133,7 +133,7 @@ export class UserService {
     }
 
     find(data:any) { 
-        var token = window.localStorage.getItem("token");
+        var token: string = String(window.localStorage.getItem("token")) ;
         if(token!=null) {
             this.http.get("https://boiling-sea-05714.herokuapp.com/UserRegion?"+this.url.encode(data)).subscribe((response:any)=>{
                 if(response["success"]==true) {
@@ -149,7 +149,7 @@ export class UserService {
     }
 
     getPaginationNumber(): void {
-        var token = window.localStorage.getItem("token");
+        var token: string = String(window.localStorage.getItem("token")) ;
         var url = 'https://boiling-sea-05714.herokuapp.com/UserRegion/WOC/Pagination?token=' + token;
         this.http.get(url).subscribe(
             (response: any) => {

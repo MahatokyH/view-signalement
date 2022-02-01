@@ -12,7 +12,7 @@ export class TypeService {
     constructor(private http: HttpClient) { } 
 
     AllListe() : void {
-        var token=window.localStorage.getItem("token");
+        var token: string = String(window.localStorage.getItem("token")) ;
         const  options = { headers: { 'Content-Type': 'application/json', 'Authorization': token } };
         this.http.get('https://boiling-sea-05714.herokuapp.com/TypeDeSignalement',options).subscribe(
             (response: Type[] | any ) => { 
